@@ -27,6 +27,11 @@ log "Se ha optimizado la aplicación"
 
 echo "Starting Supervisor"
 
+run_command "php artisan migrate --force"
+
+
+log "Se ha optimizado la aplicación"
+
 /usr/bin/supervisord -c /etc/supervisord.conf
 log "Se ha iniciado Supervisor"
 

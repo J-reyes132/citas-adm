@@ -10,43 +10,39 @@ services:
     env_file:
          - .env
     volumes:
-
          - ./.env:/var/www/.env
     ports:
-        - "8000:80"
+         - "8000:80"
     depends_on:
         mysql:
             condition: service_healthy
     networks:
-
-    - app-network
+        - app-network
 
 
 
 
  mysql:
-  container_name: mysql
-  image: mysql
-  restart: always
-  healthcheck:
-    test: ["CMD", "mysql" ,"--password=mysqlpw", "--user=root", "--execute=SHOW DATABASES"]
-    interval: 15s
-    timeout: 20s
-    retries: 5
-    start_period: 15s
-  environment:
-    MYSQL_DATABASE: ${DB_DATABASE}
-    MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-    MYSQL_USER: ${DB_USERNAME}
-    MYSQL_PASSWORD: ${DB_PASSWORD}
-  networks:
-   - app-network
+    container_name: mysql
+    image: mysql
+    restart: always
+    healthcheck:
+            test: ["CMD", "mysql" ,"--password=root", "--user=root", "--execute=SHOW DATABASES"]
+            interval: 15s
+            timeout: 20s
+            retries: 5
+            start_period: 15s
+    environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+    networks:
+            - app-network
 
 
  #Docker Networks
 
 networks:
-
- app-network:
-
-  driver: bridge
+  app-network:
+    driver: bridge
